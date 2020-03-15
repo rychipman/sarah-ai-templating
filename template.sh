@@ -1,6 +1,14 @@
 #!/bin/bash
 
-cat styles.csv \
+set -o errexit
+
+infile="${1:-styles.csv}"
+outdir=output
+
+rm -rf "$outdir"
+mkdir -p "$outdir"
+
+cat "$infile" \
     | sed -e 's/\r/\n/g' \
     | sed -e '/^,/d' \
     | sed -e '/^$/d' \
